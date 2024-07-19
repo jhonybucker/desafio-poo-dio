@@ -1,63 +1,39 @@
+import java.time.LocalDate;
+
 import br.com.dio.desafio.dominio.Bootcamp;
 import br.com.dio.desafio.dominio.Curso;
 import br.com.dio.desafio.dominio.Dev;
 import br.com.dio.desafio.dominio.Mentoria;
 
-import java.time.LocalDate;
-
 public class Main {
     public static void main(String[] args) {
-        Curso curso1 = new Curso();
-        curso1.setTitulo("curso java");
-        curso1.setDescricao("descrição curso java");
-        curso1.setCargaHoraria(8);
+        // Criando instâncias de Curso
+        Curso curso1 = new Curso("Java Básico", "Aprenda o básico de Java", 8);
+        Curso curso2 = new Curso("Java Avançado", "Aprenda conceitos avançados de Java", 16);
 
-        Curso curso2 = new Curso();
-        curso2.setTitulo("curso js");
-        curso2.setDescricao("descrição curso js");
-        curso2.setCargaHoraria(4);
+        // Criando instância de Mentoria
+        Mentoria mentoria1 = new Mentoria("Mentoria Java", "Tire suas dúvidas sobre Java", LocalDate.now());
 
-        Mentoria mentoria = new Mentoria();
-        mentoria.setTitulo("mentoria de java");
-        mentoria.setDescricao("descrição mentoria java");
-        mentoria.setData(LocalDate.now());
+        // Criando instância de Bootcamp
+        Bootcamp bootcamp = new Bootcamp("Bootcamp Java", "Bootcamp completo de Java");
 
-        /*System.out.println(curso1);
-        System.out.println(curso2);
-        System.out.println(mentoria);*/
+        // Criando instância de Dev
+        Dev dev1 = new Dev("João");
 
-        Bootcamp bootcamp = new Bootcamp();
-        bootcamp.setNome("Bootcamp Java Developer");
-        bootcamp.setDescricao("Descrição Bootcamp Java Developer");
-        bootcamp.getConteudos().add(curso1);
-        bootcamp.getConteudos().add(curso2);
-        bootcamp.getConteudos().add(mentoria);
+        // Inscrevendo o dev nos cursos e mentorias
+        dev1.inscreverCurso(curso1);
+        dev1.inscreverCurso(curso2);
+        dev1.inscreverMentoria(mentoria1);
 
-        Dev devCamila = new Dev();
-        devCamila.setNome("Camila");
-        devCamila.inscreverBootcamp(bootcamp);
-        System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        devCamila.progredir();
-        devCamila.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        System.out.println("Conteúdos Concluídos Camila:" + devCamila.getConteudosConcluidos());
-        System.out.println("XP:" + devCamila.calcularTotalXp());
+        // Exibindo as inscrições do dev
+        System.out.println("Cursos inscritos de " + dev1.getNome() + ": ");
+        for (Curso curso : dev1.getCursosInscritos()) {
+            System.out.println(curso.getTitulo());
+        }
 
-        System.out.println("-------");
-
-        Dev devJoao = new Dev();
-        devJoao.setNome("Joao");
-        devJoao.inscreverBootcamp(bootcamp);
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        devJoao.progredir();
-        devJoao.progredir();
-        devJoao.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        System.out.println("Conteúdos Concluidos João:" + devJoao.getConteudosConcluidos());
-        System.out.println("XP:" + devJoao.calcularTotalXp());
-
+        System.out.println("Mentorias inscritas de " + dev1.getNome() + ": ");
+        for (Mentoria mentoria : dev1.getMentoriasInscritas()) {
+            System.out.println(mentoria.getTitulo());
+        }
     }
-
 }
